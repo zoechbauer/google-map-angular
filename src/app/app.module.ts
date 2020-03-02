@@ -12,7 +12,7 @@ import { AppComponent } from './app.component';
     AppRoutingModule,
     AgmCoreModule.forRoot({
       // TODO change apiKey before commit
-      apiKey: 'AIzaSyBtPlYHSJEb_fg2rqIGNmLUvM5pVt8JTvE'
+      apiKey: 'your_api_key'
     })
   ],
   providers: [],

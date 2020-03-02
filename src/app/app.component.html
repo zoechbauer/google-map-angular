@@ -27,12 +27,47 @@
     </form>
   </div>
 </nav>
-
+<!-- IMPORTANT NOTE:angular2-google-maps is outdated, so I did setup google-maps with the official
+example of google https://stackblitz.com/edit/angular-google-maps-demo
+and then used the code of this course -->
 <div class="container">
   <div class="row">
     <div class="col-md-12">
       <div class="map">
-        <agm-map [latitude]="lat" [longitude]="lng"></agm-map>
+        <agm-map
+          [latitude]="lat"
+          [longitude]="lng"
+          [zoom]="zoom"
+          [disableDefaultUI]="false"
+          [zoomControl]="false"
+          (mapClick)="mapClicked($event)"
+        >
+          <agm-marker
+            *ngFor="let m of markers; let i = index"
+            (markerClick)="clickedMarker(m, i)"
+            [latitude]="m.lat"
+            [longitude]="m.lng"
+            [label]="m.label"
+            [markerDraggable]="m.draggable"
+            (dragEnd)="markerDragEnd(m, $event)"
+          >
+            <agm-info-window>
+              <h3>
+                Info Window Content for <strong>{{ m.label }}</strong>
+              </h3>
+            </agm-info-window>
+          </agm-marker>
+
+          <agm-circle
+            [latitude]="lat + 0.3"
+            [longitude]="lng"
+            [radius]="5000"
+            [fillColor]="'red'"
+            [circleDraggable]="true"
+            [editable]="true"
+          >
+          </agm-circle>
+        </agm-map>
       </div>
     </div>
   </div>
