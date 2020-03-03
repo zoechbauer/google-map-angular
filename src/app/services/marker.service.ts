@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Init } from '../init-markers';
+import { Marker } from '../models/marker';
 
 @Injectable()
 export class MarkerService extends Init {
@@ -10,31 +11,31 @@ export class MarkerService extends Init {
   }
 
   getMarkers() {
-    const markers = JSON.parse(localStorage.getItem('markers'));
+    const markers: Marker[] = JSON.parse(localStorage.getItem('markers'));
     return markers;
   }
 
-  addMarker(newMarker) {
-    const markers = JSON.parse(localStorage.getItem('markers'));
+  addMarker(newMarker: Marker) {
+    const markers: Marker[] = JSON.parse(localStorage.getItem('markers'));
     markers.push(newMarker);
     localStorage.setItem('markers', JSON.stringify(markers));
   }
 
-  updateMarker(marker, newLat, newLng) {
-    let markers = JSON.parse(localStorage.getItem('markers'));
-    markers = markers.map(el => {
+  updateMarker(marker: Marker, newLat: number, newLng: number) {
+    const markers: Marker[] = JSON.parse(localStorage.getItem('markers'));
+    const markersUpd: Marker[] = markers.map(el => {
       if (el.lat === marker.lat && el.lng === marker.lng) {
         el.lat = newLat;
         el.lng = newLng;
       }
       return el;
     });
-    localStorage.setItem('markers', JSON.stringify(markers));
+    localStorage.setItem('markers', JSON.stringify(markersUpd));
   }
 
-  removeMarker(marker) {
-    const markers = JSON.parse(localStorage.getItem('markers'));
-    const markersUpd = markers.filter(
+  removeMarker(marker: Marker) {
+    const markers: Marker[] = JSON.parse(localStorage.getItem('markers'));
+    const markersUpd: Marker[] = markers.filter(
       el => el.lat !== marker.lat && el.lng !== marker.lng
     );
     localStorage.setItem('markers', JSON.stringify(markersUpd));

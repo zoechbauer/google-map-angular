@@ -1,3 +1,4 @@
+import { Marker } from './models/marker';
 export class Init {
   load() {
     if (
@@ -5,7 +6,7 @@ export class Init {
       localStorage.getItem('markers') === undefined
     ) {
       console.log('no markers found in local storage ..... creating....');
-      const markers = [
+      const markers: Marker[] = [
         {
           lat: 51.673858,
           lng: 7.815982,

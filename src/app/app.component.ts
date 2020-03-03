@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MouseEvent } from '@agm/core';
 import { MarkerService } from './services/marker.service';
-
+import { Marker } from './models/marker';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -53,8 +53,8 @@ export class AppComponent {
       draggable: false
     };
 
-    const newLat = $event.coords.lat;
-    const newLng = $event.coords.lng;
+    const newLat: number = $event.coords.lat;
+    const newLng: number = $event.coords.lng;
     this.markerService.updateMarker(updMarker, newLat, newLng);
   }
 
@@ -65,7 +65,7 @@ export class AppComponent {
     } else {
       isDraggable = false;
     }
-    const newMarker = {
+    const newMarker: Marker = {
       lat: parseFloat(this.markerLat),
       lng: parseFloat(this.markerLng),
       label: this.markerName,
@@ -75,20 +75,12 @@ export class AppComponent {
     this.markerService.addMarker(newMarker);
   }
 
-  removeMarker(marker) {
+  removeMarker(marker: Marker) {
     console.log(`remove Marker ${marker.label}....`);
     const markersUpd = this.markers.filter(
-      el => el.lat !== marker.lat && el.lng !== marker.lng
+      (el: Marker) => el.lat !== marker.lat && el.lng !== marker.lng
     );
     this.markers = markersUpd;
     this.markerService.removeMarker(marker);
   }
-}
-
-// just an interface for type safety.
-interface Marker {
-  lat: number;
-  lng: number;
-  label?: string;
-  draggable: boolean;
 }
