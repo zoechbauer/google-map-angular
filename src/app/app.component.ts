@@ -70,6 +70,15 @@ export class AppComponent {
     this.markers.push(newMarker);
     this.markerService.addMarker(newMarker);
   }
+
+  removeMarker(marker) {
+    console.log(`remove Marker ${marker.label}....`);
+    const markersUpd = this.markers.filter(
+      el => el.lat !== marker.lat && el.lng !== marker.lng
+    );
+    this.markers = markersUpd;
+    this.markerService.removeMarker(marker);
+  }
 }
 
 // just an interface for type safety.

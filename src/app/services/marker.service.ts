@@ -31,4 +31,12 @@ export class MarkerService extends Init {
     });
     localStorage.setItem('markers', JSON.stringify(markers));
   }
+
+  removeMarker(marker) {
+    const markers = JSON.parse(localStorage.getItem('markers'));
+    const markersUpd = markers.filter(
+      el => el.lat !== marker.lat && el.lng !== marker.lng
+    );
+    localStorage.setItem('markers', JSON.stringify(markersUpd));
+  }
 }
