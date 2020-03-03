@@ -67,7 +67,7 @@ export class AppComponent {
       draggable: isDraggable
     };
     this.markers.push(newMarker);
-    console.log(this.markers);
+    this.markerService.addMarker(newMarker);
   }
 }
 
