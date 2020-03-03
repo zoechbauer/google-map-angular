@@ -19,4 +19,16 @@ export class MarkerService extends Init {
     markers.push(newMarker);
     localStorage.setItem('markers', JSON.stringify(markers));
   }
+
+  updateMarker(marker, newLat, newLng) {
+    let markers = JSON.parse(localStorage.getItem('markers'));
+    markers = markers.map(el => {
+      if (el.lat === marker.lat && el.lng === marker.lng) {
+        el.lat = newLat;
+        el.lng = newLng;
+      }
+      return el;
+    });
+    localStorage.setItem('markers', JSON.stringify(markers));
+  }
 }

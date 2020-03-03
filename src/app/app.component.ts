@@ -48,9 +48,10 @@ export class AppComponent {
       label: marker.label,
       draggable: false
     };
-    // will be needed when save in local storage
+
     const newLat = $event.coords.lat;
     const newLng = $event.coords.lng;
+    this.markerService.updateMarker(updMarker, newLat, newLng);
   }
 
   addMarker() {
