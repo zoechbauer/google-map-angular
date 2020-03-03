@@ -15,6 +15,7 @@ export class AppComponent {
   markerLat: string;
   markerLng: string;
   markerDraggable: string;
+  infoWindowContent = 'Your Informations ....';
 
   // initial center position for the map
   lat: number = 51.673858;
@@ -32,11 +33,14 @@ export class AppComponent {
   }
 
   mapClicked($event: MouseEvent) {
-    this.markers.push({
+    const newMarker = {
       lat: $event.coords.lat,
       lng: $event.coords.lng,
+      label: `Nr. ${this.markers.length}`,
       draggable: false
-    });
+    };
+    this.markers.push(newMarker);
+    this.markerService.addMarker(newMarker);
   }
 
   markerDragEnd(marker: Marker, $event: MouseEvent) {
