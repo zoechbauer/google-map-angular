@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { MarkerService } from './services/marker.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,7 +18,7 @@ import { AppComponent } from './app.component';
     }),
     FormsModule
   ],
-  providers: [],
+  providers: [MarkerService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
