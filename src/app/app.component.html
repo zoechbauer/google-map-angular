@@ -1,120 +1,137 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">MapIt</a>
-  <button
-    class="navbar-toggler"
-    type="button"
-    data-toggle="collapse"
-    data-target="#navbarsExampleDefault"
-    aria-controls="navbarsExampleDefault"
-    aria-expanded="false"
-    aria-label="Toggle navigation"
-  >
-    <span class="navbar-toggler-icon"></span>
-  </button>
+<div class="container-fluid">
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">MapIt</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarsExampleDefault"
+      aria-controls="navbarsExampleDefault"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-    <ul class="navbar-nav mr-auto"></ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input
-        class="form-control mr-sm-2"
-        type="text"
-        placeholder="Search"
-        aria-label="Search"
-      />
-      <button class="btn btn-secondary my-2 my-sm-0" type="submit">
-        Search
-      </button>
-    </form>
-  </div>
-</nav>
-<!-- IMPORTANT NOTE:angular2-google-maps is outdated, so I did setup google-maps with the official
-example of google https://stackblitz.com/edit/angular-google-maps-demo
-and then used the code of this course -->
-<div class="container">
-  <div class="row">
-    <div class="col-md-12">
-      <div class="map">
-        <agm-map
-          [latitude]="lat"
-          [longitude]="lng"
-          [zoom]="zoom"
-          [disableDefaultUI]="false"
-          [zoomControl]="false"
-          (mapClick)="mapClicked($event)"
-        >
-          <agm-marker
-            *ngFor="let m of markers; let i = index"
-            (markerClick)="clickedMarker(m, i)"
-            [latitude]="m.lat"
-            [longitude]="m.lng"
-            [label]="m.label"
-            [markerDraggable]="m.draggable"
-            (dragEnd)="markerDragEnd(m, $event)"
-          >
-            <agm-info-window>
-              <h3>
-                <strong>{{ m.label }}</strong>
-              </h3>
-              <h5>{{ infoWindowContent }}</h5>
-              <a class="delete" (click)="removeMarker(m)">Delete</a>
-            </agm-info-window>
-          </agm-marker>
-
-          <agm-circle
-            [latitude]="lat + 0.3"
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav mr-auto"></ul>
+      <form class="form-inline my-2 my-lg-0">
+        <input
+          class="form-control mr-sm-2"
+          type="text"
+          placeholder="Search"
+          aria-label="Search"
+        />
+        <button class="btn btn-secondary my-2 my-sm-0" type="submit">
+          Search
+        </button>
+      </form>
+    </div>
+  </nav>
+  <!-- IMPORTANT NOTE:angular2-google-maps is outdated, so I did setup google-maps with the official
+  example of google https://stackblitz.com/edit/angular-google-maps-demo
+  and then used the code of this course -->
+  <div class="containerk-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="map">
+          <agm-map
+            [latitude]="lat"
             [longitude]="lng"
-            [radius]="5000"
-            [fillColor]="'red'"
-            [circleDraggable]="true"
-            [editable]="true"
+            [zoom]="zoom"
+            [disableDefaultUI]="false"
+            [zoomControl]="false"
+            (mapClick)="mapClicked($event)"
           >
-          </agm-circle>
-        </agm-map>
+            <agm-marker
+              *ngFor="let m of markers; let i = index"
+              (markerClick)="clickedMarker(m, i)"
+              [latitude]="m.lat"
+              [longitude]="m.lng"
+              [label]="m.label"
+              [markerDraggable]="m.draggable"
+              (dragEnd)="markerDragEnd(m, $event)"
+            >
+              <agm-info-window>
+                <h3>
+                  <strong>{{ m.label }}</strong>
+                </h3>
+                <h5>{{ infoWindowContent }}</h5>
+                <a class="delete" (click)="removeMarker(m)">Delete</a>
+              </agm-info-window>
+            </agm-marker>
+
+            <agm-circle
+              [latitude]="lat + 0.3"
+              [longitude]="lng"
+              [radius]="5000"
+              [fillColor]="'red'"
+              [circleDraggable]="true"
+              [editable]="true"
+            >
+            </agm-circle>
+          </agm-map>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="row">
-    <div class="col-md12">
+    <div class="row">
       <div class="card">
-        <h3 class="card-header">Add New Marker</h3>
-        <div class="card-body">
+        <h4 class="card-header pb-0">Add New Marker</h4>
+        <div class="card-body pt-2">
           <form (submit)="addMarker()">
-            <label for="markerName">Location Name</label>
+            <div class="row">
+              <div class="col">
+                <label for="markerName">Location Name</label>
+                <input
+                  type="text"
+                  [(ngModel)]="markerName"
+                  name="markerName"
+                  id="markerName"
+                  class="form-control"
+                />
+              </div>
+              <div class="col">
+                <label for="markerDraggable">Draggable</label>
+                <select
+                  [(ngModel)]="markerDraggable"
+                  name="markerDraggable"
+                  id="markerDraggable"
+                  class="form-control"
+                >
+                  <option value="no">No</option>
+                  <option value="yes">Yes</option>
+                </select>
+              </div>
+
+              <div class="w-100"></div>
+              <div class="col mt-3">
+                <label for="markerLat">Latitude</label>
+                <input
+                  type="text"
+                  [(ngModel)]="markerLat"
+                  name="markerLat"
+                  id="markerLat"
+                  class="form-control"
+                />
+              </div>
+              <div class="col mt-3">
+                <label for="markerLng">Longitude</label>
+                <input
+                  type="text"
+                  [(ngModel)]="markerLng"
+                  name="markerLng"
+                  id="markerLng"
+                  class="form-control"
+                />
+              </div>
+            </div>
+
             <input
-              type="text"
-              [(ngModel)]="markerName"
-              name="markerName"
-              id="markerName"
+              type="submit"
+              value="Map it!"
+              class="mt-3 btn btn-primary btn-block form-control"
             />
-
-            <label for="markerLat">Latitude</label>
-            <input
-              type="text"
-              [(ngModel)]="markerLat"
-              name="markerLat"
-              id="markerLat"
-            />
-
-            <label for="markerLng">Longitude</label>
-            <input
-              type="text"
-              [(ngModel)]="markerLng"
-              name="markerLng"
-              id="markerLng"
-            />
-
-            <label for="markerDraggable">Draggable</label>
-            <select
-              [(ngModel)]="markerDraggable"
-              name="markerDraggable"
-              id="markerDraggable"
-            >
-              <option value="no">No</option>
-              <option value="yes">Yes</option>
-            </select>
-
-            <input type="submit" value="Map it!" />
           </form>
         </div>
       </div>
