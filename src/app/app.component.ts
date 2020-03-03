@@ -9,6 +9,11 @@ import { MouseEvent } from '@agm/core';
 export class AppComponent {
   // google maps zoom level
   zoom: number = 10;
+  // form fields
+  markerName: string;
+  markerLat: string;
+  markerLng: string;
+  markerDraggable: string;
 
   // initial center position for the map
   lat: number = 51.673858;
@@ -61,6 +66,23 @@ export class AppComponent {
     // will be needed when save in local storage
     const newLat = $event.coords.lat;
     const newLng = $event.coords.lng;
+  }
+
+  addMarker() {
+    let isDraggable: boolean;
+    if (this.markerDraggable === 'yes') {
+      isDraggable = true;
+    } else {
+      isDraggable = false;
+    }
+    const newMarker = {
+      lat: parseFloat(this.markerLat),
+      lng: parseFloat(this.markerLng),
+      label: this.markerName,
+      draggable: isDraggable
+    };
+    this.markers.push(newMarker);
+    console.log(this.markers);
   }
 }
 

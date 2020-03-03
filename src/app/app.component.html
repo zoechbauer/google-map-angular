@@ -71,4 +71,51 @@ and then used the code of this course -->
       </div>
     </div>
   </div>
+
+  <div class="row">
+    <div class="col-md12">
+      <div class="card">
+        <h3 class="card-header">Add New Marker</h3>
+        <div class="card-body">
+          <form (submit)="addMarker()">
+            <label for="markerName">Location Name</label>
+            <input
+              type="text"
+              [(ngModel)]="markerName"
+              name="markerName"
+              id="markerName"
+            />
+
+            <label for="markerLat">Latitude</label>
+            <input
+              type="text"
+              [(ngModel)]="markerLat"
+              name="markerLat"
+              id="markerLat"
+            />
+
+            <label for="markerLng">Longitude</label>
+            <input
+              type="text"
+              [(ngModel)]="markerLng"
+              name="markerLng"
+              id="markerLng"
+            />
+
+            <label for="markerDraggable">Draggable</label>
+            <select
+              [(ngModel)]="markerDraggable"
+              name="markerDraggable"
+              id="markerDraggable"
+            >
+              <option value="no">No</option>
+              <option value="yes">Yes</option>
+            </select>
+
+            <input type="submit" value="Map it!" />
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
