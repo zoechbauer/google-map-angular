@@ -17,3 +17,29 @@ a {
 .card-header {
   font-weight: 600;
 }
+
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+
+.flex-1 {
+  flex: 1.5;
+}
+
+.flex-2 {
+  flex: 3;
+  min-width: 300px;
+}
+
+.flex-3 {
+  flex: 5;
+}
+
+.flex-1,
+.flex-2,
+.flex-3 {
+  margin: 0.2em 0.5em;
+  padding: 0.2e 0.5em;
+}
